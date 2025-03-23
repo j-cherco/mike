@@ -8,17 +8,23 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest  # Usa una máquina virtual con macOS
+    runs-on: macos-latest
 
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v2
 
+      - name: Verificar instalación de clang
+        run: clang --version
+
       - name: Compilar programa en C
         run: clang mike_macos.c -o mike_macos
+
+      - name: Comprobar que el archivo existe
+        run: ls -la mike_macos
 
       - name: Subir archivo compilado
         uses: actions/upload-artifact@v2
         with:
           name: mike-macos
-          path: mike_macos
+          path: ./mike_macos
