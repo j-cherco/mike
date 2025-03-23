@@ -17,14 +17,18 @@ jobs:
       - name: Verificar instalación de clang
         run: clang --version
 
-      - name: Compilar programa en C
-        run: clang mike_macos.c -o mike_macos
+      - name: Compilar programa en C y listar archivos
+        run: |
+          clang mike_macos.c -o mike_macos
+          echo "Listado de archivos tras la compilación:"
+          ls -la
 
-      - name: Comprobar que el archivo existe
+      - name: Comprobar existencia del archivo compilado
         run: ls -la mike_macos
 
       - name: Subir archivo compilado
         uses: actions/upload-artifact@v2
         with:
           name: mike-macos
-          path: ./mike_macos
+          path: mike_macos
+
