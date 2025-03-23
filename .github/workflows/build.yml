@@ -1,33 +1,25 @@
-name: Compilar programa C para macOS
+name: Compile for macOS
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main  # Se ejecuta al hacer push a la rama main
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-latest  # Usa un runner de macOS
 
     steps:
-      - name: Clonar repositorio
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4  # Descarga tu código del repositorio
 
-      - name: Verificar instalación de clang
-        run: clang --version
-
-      - name: Compilar programa en C y listar archivos
+      - name: Compile for macOS
         run: |
+          # Compila el código con clang (compilador de macOS)
           clang mike_macos.c -o mike_macos
-          echo "Listado de archivos tras la compilación:"
-          ls -la
 
-      - name: Comprobar existencia del archivo compilado
-        run: ls -la mike_macos
-
-      - name: Subir archivo compilado
-        uses: actions/upload-artifact@v2.3.1
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
         with:
-          name: mike-macos
-          path: mike_macos
+          name: mike_macos-executable
+          path: mike_macos  # Sube el ejecutable como artefacto
