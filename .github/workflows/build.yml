@@ -1,0 +1,24 @@
+name: Compilar programa C para macOS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest  # Usa una máquina virtual con macOS
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v2
+
+      - name: Compilar programa en C
+        run: clang mike_macos.c -o mike_macos
+
+      - name: Subir archivo compilado
+        uses: actions/upload-artifact@v3
+        with:
+          name: mike-macos
+          path: mike_macos
