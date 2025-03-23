@@ -18,7 +18,7 @@ jobs:
         run: clang mike_macos.c -o mike_macos
 
       - name: Subir archivo compilado
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: mike-macos
           path: mike_macos
